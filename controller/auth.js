@@ -44,6 +44,28 @@ var loginUser =async (req,res)=>{
 
 }
 
+var createTask =async (req,res)=>{
+    try {
+        var {id ,title ,description,status }=req.body;
+        var idUser=req.parser
+       
+        let hashPassword=await bcrypt.hash(password,10);
+        
+        let sqlInsert="INSERT INTO public.tasks2(id, status, description, title,idUser) VALUES ( $1 , $2 , $3,$4,$5);"
+        let sqlData=[id ,status ,description,title,idUser ]
+        
+        let result =await client.query(sqlInsert,sqlData)
+        
+        res.send("create task  succefully ( : ")
+
+    } catch (error) {
+        console.log(error)
+        res.send(error)
+    }
+
+}
+
+
 module.exports={
     registerUser,
 }
