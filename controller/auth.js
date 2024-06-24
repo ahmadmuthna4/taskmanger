@@ -67,8 +67,6 @@ var createTask =async (req,res)=>{
 
 var getallTask =async (req,res)=>{
     try {
-        var {id ,title ,description,status }=req.body;
-        var idUser=req.parser
        
         let hashPassword=await bcrypt.hash(password,10);
         
@@ -76,6 +74,29 @@ var getallTask =async (req,res)=>{
       
         
         let result =await client.query(sqlInsert)
+        
+        
+        res.json({message:result})
+
+    } catch (error) {
+        console.log(error)
+        res.send(error)
+    }
+
+}
+
+
+var getaTaskByid =async (req,res)=>{
+    try {
+        var {id}=req.body;
+       
+        let hashPassword=await bcrypt.hash(password,10);
+        
+        let sqlInsert="SELECT * FROM tasks2 where id =($1);"
+        let sqlData=[id]
+      
+        
+        let result =await client.query(sqlInsert,sqlData)
         
         
         res.json({message:result})
