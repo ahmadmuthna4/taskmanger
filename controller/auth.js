@@ -94,11 +94,7 @@ var getaTaskByid =async (req,res)=>{
         
         let sqlInsert="SELECT * FROM tasks2 where id =($1);"
         let sqlData=[id]
-      
-        
         let result =await client.query(sqlInsert,sqlData)
-        
-        
         res.json({message:result})
 
     } catch (error) {
@@ -112,4 +108,8 @@ var getaTaskByid =async (req,res)=>{
 
 module.exports={
     registerUser,
+    loginUser,
+    createTask,
+    getallTask,
+    getaTaskByid
 }
