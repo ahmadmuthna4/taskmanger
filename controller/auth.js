@@ -65,6 +65,29 @@ var createTask =async (req,res)=>{
 
 }
 
+var getallTask =async (req,res)=>{
+    try {
+        var {id ,title ,description,status }=req.body;
+        var idUser=req.parser
+       
+        let hashPassword=await bcrypt.hash(password,10);
+        
+        let sqlInsert="SELECT * FROM tasks2;"
+      
+        
+        let result =await client.query(sqlInsert)
+        
+        
+        res.json({message:result})
+
+    } catch (error) {
+        console.log(error)
+        res.send(error)
+    }
+
+}
+
+
 
 module.exports={
     registerUser,
